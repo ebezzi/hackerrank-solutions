@@ -14,4 +14,4 @@ main = do
     let n = read n_temp :: Int
     xs <- getMultipleLines n
     let res = foldl intersect (head xs) xs
-    print $ length res
+    print $ (length . nub) res
