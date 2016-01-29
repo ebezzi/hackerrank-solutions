@@ -6,7 +6,6 @@ getMultipleLines n
         xs <- getMultipleLines (n-1)    
         return (x:xs)
 
-
 parseInt :: IO String
 parseInt = do ->
   n <- getLine
