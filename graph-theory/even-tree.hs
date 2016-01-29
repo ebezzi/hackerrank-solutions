@@ -29,12 +29,26 @@ isLeaf :: [Edge] -> Vertex -> Bool
 isLeaf es v = isNothing $ find (\x -> v == snd x) es
 
 descendants :: [Edge] -> Vertex -> [Vertex]
-descendants es v = map fst $ filter (\x -> v == snd x) es
+descendants es v = map fst $ edges es v
+
+edges :: [Edge] -> Vertex -> [Edge]
+edges es v = filter (\x -> v == snd x) es
+
+countEdges :: Tree -> Int
+countEdges (Leaf _) = 1
+countEdges (Node _ xs) = length xs + map countEdges xs
 
 mkTree :: [Edge] -> Vertex -> Tree
 mkTree es v
     | isLeaf es v = Leaf v
     | otherwise = Node v (map (mkTree es) (descendants es v))
+
+dropEdges :: Tree -> Int
+dropEdges (Leaf x) = 0
+dropEdges (Node x xs) = length evenSubtrees + map dropEdges oddSubtrees where 
+    evenSubtrees = filter (\x -> even (countEdges x)) subtrees
+    oddSubtrees = filter (\x -> odd (countEdges x)) subtrees
+    subtrees = xs
 
 main :: IO ()
 main = do
@@ -42,5 +56,8 @@ main = do
     let (n,m) = point first
     edgesTemp <- getMultipleLines m
     let edges = map point edgesTemp
-    let tree = mkTree edges 1
-    --print tree
+    let tree = mkTree edges 3
+    print tree
+
+
+
