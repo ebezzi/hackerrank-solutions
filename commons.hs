@@ -6,8 +6,8 @@ getMultipleLines n
         xs <- getMultipleLines (n-1)    
         return (x:xs)
 
-parseInt :: IO String
-parseInt = do ->
+parseInt :: IO Int
+parseInt = do
   n <- getLine
   return (toInt n)
 
@@ -15,6 +15,6 @@ toInt :: String -> Int
 toInt xs = read xs :: Int
 
 parseIntArray :: IO [Int]
-parseIntArray = do ->
+parseIntArray = do
   xs <- getLine
   return (map toInt xs)
