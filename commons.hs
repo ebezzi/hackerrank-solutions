@@ -17,4 +17,22 @@ toInt xs = read xs :: Int
 parseIntArray :: IO [Int]
 parseIntArray = do
   xs <- getLine
-  return (map toInt xs)
+  return $ map toInt (words xs)
+
+format :: [Int] -> String
+format xs = unwords (map show xs)
+
+
+
+
+-- Strings
+
+incrementChar :: Char -> Char
+incrementChar 'z' = 'a'
+incrementChar c   = chr (1 + ord c)
+
+increment :: String -> String
+increment (x:xs)  
+  | x == 'z'  = 'a' : increment xs
+  | otherwise = incrementChar x : xs
+
