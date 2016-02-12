@@ -5,6 +5,12 @@ import Data.Function (fix)
 
 type Counter = Map Char Int
 
+increment :: Char -> State Counter Int
+increment c = do
+  counter <- get
+  put (insertWith (+) c 1 counter)
+
+
 something :: String -> State Counter Int
 something [] = return 0
 something (x:xs) = do
@@ -24,3 +30,5 @@ main = do
 ----main = print $ (fix openfib) 10
 
 --memoize :: a -> 
+
+-- https://gist.github.com/ramntry/345139e76c3aec92e78e
