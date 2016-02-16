@@ -4,11 +4,17 @@ import Data.Map
 
 type Counter = Map Char Int
 
+type Counter = Map Char Int
+
+increment :: Char -> State Counter ()
+increment c = do
+  counter <- get
+  put (insertWith (+) c 1 counter)
+
 something :: String -> State Counter Int
 something [] = return 0
 something (x:xs) = do
-  counter <- get
-  put (insertWith (+) x 1 counter)
+  increment x
   next <- something xs
   return (1 + next)
 

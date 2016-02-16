@@ -50,8 +50,8 @@ fastest_f :: Int -> Int
 fastest_f = index f_tree
 
 main = do
-    --n <- readLn
-    --xs <- replicateM n readLn
-    --mapM_ print (map fastest_f xs)
-    print $ fastest_f 100000
-    print $ fastest_f 100001
+    n <- readLn
+    xs <- replicateM n readLn
+    mapM_ print (map fastest_f xs)
+    --print $ fastest_f 100000
+    --print $ fastest_f 100001
